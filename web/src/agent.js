@@ -1,5 +1,3 @@
-'use strict';
-
 import superagentPromise from 'superagent-promise';
 import _superagent from 'superagent';
 
@@ -16,9 +14,9 @@ const requests = {
     superagent.post(`${API_ROOT}${url}`, body).then(responseBody)
 };
 
-const Articles = {
+const Projects = {
   all: page =>
-    requests.get(`/articles?limit=10`)
+    requests.get(`/projects`)
 };
 
 const Auth = {
@@ -29,6 +27,6 @@ const Auth = {
 };
 
 export default {
-  Articles,
+  Projects,
   Auth
 };

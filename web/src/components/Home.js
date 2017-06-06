@@ -2,27 +2,30 @@
 import Banner from './Banner';
 import MainView from './MainView';
 import React from 'react';
-import agent from '../agent';
 import { connect } from 'react-redux';
-
-const Promise = global.Promise;
+import store from '../store'
+import agent from '../agent';
 
 const mapStateToProps = state => ({
-  appName: state.common.appName
-});
+  appName:state.common.appName,
+  projects:state.home.projects
+})
 
 const mapDispatchToProps = dispatch => ({
-  onLoad: (payload) =>
-    dispatch({ type: 'HOME_PAGE_LOADED', payload }),
+  onLoad: () =>
+    agent.Projects.all().then(data => {
+      dispatch({ type: 'GET_PROJECTS', data: data.projects })
+    })
 });
 
 class Home extends React.Component {
   componentWillMount() {
-    this.props.onLoad(agent.Articles.all());
+    this.props.onLoad();
+    // store.dispatch({ type: 'GET_PROJECTS' })
   }
 
   render() {
-    console.log("RENDER HOME")
+    console.log("RENDER HOME", this.props)
     return (
       <div className="home-page">
 
@@ -30,15 +33,7 @@ class Home extends React.Component {
 
         <div className="container page">
           <div className="row">
-            <MainView />
-
-            <div className="col-md-3">
-              <div className="sidebar">
-
-                <p>Popular Tags</p>
-
-              </div>
-            </div>
+            <MainView projects={this.props.projects}/>
           </div>
         </div>
 
@@ -46,5 +41,4 @@ class Home extends React.Component {
     );
   }
 }
-
 export default connect(mapStateToProps, mapDispatchToProps)(Home);

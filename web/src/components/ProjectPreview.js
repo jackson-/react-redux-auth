@@ -1,39 +1,39 @@
 import React from 'react';
 
-const ArticlePreview = props => {
-  const article = props.article;
+const ProjectPreview = props => {
+  const project = props.project;
 
   return (
-    <div className="article-preview">
-      <div className="article-meta">
+    <div className="project-preview">
+      <div className="project-meta">
         <a>
-          <img src={article.author.image} />
+          <img alt='project_image' src={project.author.image} />
         </a>
 
         <div className="info">
           <a className="author">
-            {article.author.username}
+            {project.author.username}
           </a>
           <span className="date">
-            {new Date(article.createdAt).toDateString()}
+            {new Date(project.createdAt).toDateString()}
           </span>
         </div>
 
         <div className="pull-xs-right">
           <button
             className="btn btn-sm btn-outline-primary">
-            <i className="ion-heart"></i> {article.favoritesCount}
+            <i className="ion-heart"></i> {project.favoritesCount}
           </button>
         </div>
       </div>
 
-      <a to={`article/${article.slug}`} className="preview-link">
-        <h1>{article.title}</h1>
-        <p>{article.description}</p>
+      <a to={`project/${project.slug}`} className="preview-link">
+        <h1>{project.title}</h1>
+        <p>{project.description}</p>
         <span>Read more...</span>
         <ul className="tag-list">
           {
-            article.tagList.map(tag => {
+            project.tagList.map(tag => {
               return (
                 <li className="tag-default tag-pill tag-outline" key={tag}>
                   {tag}
@@ -47,4 +47,4 @@ const ArticlePreview = props => {
   );
 }
 
-export default ArticlePreview;
+export default ProjectPreview;

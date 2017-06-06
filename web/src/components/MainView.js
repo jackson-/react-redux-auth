@@ -1,12 +1,8 @@
-import ArticleList from './ArticleList';
+import ProjectList from './ProjectList';
 import React from 'react';
-import {connect} from 'react-redux';
 
-const mapStateToProps = state => ({
-  articles:state.home.articles
-})
-
-const MainView = props => {
+const MainView = ({projects}) => {
+  //console.log("MAINVIEW", props)
   return (
     <div className="col-md-9">
       <div className="feed-toggle">
@@ -23,9 +19,9 @@ const MainView = props => {
         </ul>
       </div>
 
-      <ArticleList
-        articles={props.articles} />
+      <ProjectList
+        projects={projects} />
     </div>
   )
 }
-export default connect(mapStateToProps, () => ({}))(MainView);
+export default MainView;

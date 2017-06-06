@@ -7,6 +7,7 @@ import App from './App';
 import Home from './components/Home';
 import Login from './components/Login';
 import Register from './components/Register';
+// import ProjectsHome from './components/ProjectsHome';
 import store from './store';
 
 ReactDOM.render((

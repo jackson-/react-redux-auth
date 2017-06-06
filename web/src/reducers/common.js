@@ -1,5 +1,5 @@
 const defaultState = {
-  appName: 'Conduit'
+  appName: 'Kunexxus'
 };
 
 export default (state = defaultState, action) => {

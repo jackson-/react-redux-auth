@@ -1,7 +1,7 @@
 import { Link } from 'react-router';
 import ListErrors from './ListErrors';
 import React from 'react';
-import agent from '../agent';
+
 import { connect } from 'react-redux';
 
 const mapStateToProps = state => ({ ...state.auth });
@@ -11,8 +11,8 @@ const mapDispatchToProps = dispatch => ({
     dispatch({ type: 'UPDATE_FIELD_AUTH', key: 'email', value }),
   onChangePassword: value =>
     dispatch({ type: 'UPDATE_FIELD_AUTH', key: 'password', value }),
-  onSubmit: (email, password) =>
-    dispatch({ type: 'LOGIN', payload: agent.Auth.login(email, password) })
+  onSubmit: (email, password, router) =>
+    dispatch({ type: 'LOGIN', payload: {email:email, password:password}, router:router })
 });
 
 class Login extends React.Component {
@@ -20,15 +20,16 @@ class Login extends React.Component {
     super();
     this.changeEmail = ev => this.props.onChangeEmail(ev.target.value);
     this.changePassword = ev => this.props.onChangePassword(ev.target.value);
-    this.submitForm = (email, password) => ev => {
+    this.submitForm = (email, password, router) => ev => {
       ev.preventDefault();
-      this.props.onSubmit(email, password);
+      this.props.onSubmit(email, password, router);
     };
   }
 
   render() {
     const email = this.props.email;
     const password = this.props.password;
+    const router = this.props.router
     console.log("EP",email, password)
     return (
       <div className="auth-page">
@@ -45,7 +46,7 @@ class Login extends React.Component {
 
               <ListErrors errors={this.props.errors} />
 
-              <form onSubmit={this.submitForm(email, password)}>
+              <form onSubmit={this.submitForm(email, password, router)}>
                 <fieldset>
 
                   <fieldset className="form-group">
